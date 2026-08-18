@@ -8,7 +8,7 @@ The application allows users to browse products, reserve inventory, complete ord
 # 🌐 Live Demo
 
 **Frontend:**  
-https://inventory-reservation-system-j1roy3pqc-abindas123s-projects.vercel.app
+https://inventory-reservation-system-klcbyetqt-abindas123s-projects.vercel.app/
 
 **Backend API:**  
 https://inventory-reservation-system-2yd7.onrender.com
