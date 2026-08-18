@@ -6,9 +6,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-  });
+  origin: [
+    'http://localhost:5173',
+    'https://inventory-reservation-system-j1roy3pqc-abindas123s-projects.vercel.app',
+  ],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+});
 
   app.useGlobalPipes(
     new ValidationPipe({
