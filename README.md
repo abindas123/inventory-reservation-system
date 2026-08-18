@@ -5,7 +5,16 @@ A full-stack **Inventory Reservation System** built with **NestJS**, **React**, 
 The application allows users to browse products, reserve inventory, complete orders, and automatically restore stock when reservations expire after 10 minutes.
 
 ---
+# 🌐 Live Demo
 
+**Frontend:**  
+https://inventory-reservation-system-j1roy3pqc-abindas123s-projects.vercel.app
+
+**Backend API:**  
+https://inventory-reservation-system-2yd7.onrender.com
+
+**GitHub Repository:**  
+https://github.com/abindas123/inventory-reservation-system
 ## 📖 Table of Contents
 
 - Project Overview
