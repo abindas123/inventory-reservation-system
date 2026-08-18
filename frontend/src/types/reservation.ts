@@ -4,4 +4,12 @@ export interface Reservation {
   quantity: number;
   status: string;
   expiresAt: string;
+
+  product: {
+    id: string;
+    name: string;
+    description: string;
+    price: string;
+    stock: number;
+  };
 }

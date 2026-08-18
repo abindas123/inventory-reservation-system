@@ -1,98 +1,498 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 📦 Inventory Reservation System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A full-stack **Inventory Reservation System** built with **NestJS**, **React**, **Prisma ORM**, and **PostgreSQL**.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+The application allows users to browse products, reserve inventory, complete orders, and automatically restore stock when reservations expire after 10 minutes.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📖 Table of Contents
 
-## Project setup
+- Project Overview
+- Features
+- Tech Stack
+- Architecture
+- Folder Structure
+- Database Schema
+- Reservation Workflow
+- API Endpoints
+- Installation
+- Environment Variables
+- Running the Application
+- Running Tests
+- Screenshots
+- Future Improvements
+- Author
 
-```bash
-$ npm install
+---
+
+# 🚀 Project Overview
+
+This application demonstrates a complete inventory reservation workflow.
+
+Users can:
+
+- View available products
+- Reserve a product
+- Complete an order
+- Automatically release reservations after expiry
+- Automatically restore inventory
+- Track reservation countdown in real-time
+
+The project showcases backend development with NestJS and Prisma, frontend development with React and Material UI, and scheduled background processing using Cron Jobs.
+
+---
+
+# ✨ Features
+
+## Backend
+
+- Product Management
+- Reservation Management
+- Order Management
+- PostgreSQL Database
+- Prisma ORM
+- DTO Validation
+- REST API
+- Automatic Reservation Expiry
+- Automatic Stock Restoration
+- Cron Job Scheduler
+- Unit Testing with Jest
+
+---
+
+## Frontend
+
+- Responsive Material UI
+- Product Listing
+- Reservation Details
+- Countdown Timer
+- Status Chips
+- Snackbar Notifications
+- Loading Spinner
+- Empty State
+- Responsive Layout
+
+---
+
+# 🛠 Tech Stack
+
+## Backend
+
+- NestJS
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+- Jest
+- Nest Schedule
+
+---
+
+## Frontend
+
+- React
+- Vite
+- Material UI
+- Axios
+- React Router
+
+---
+
+## Database
+
+- PostgreSQL
+
+---
+
+# 🏗 System Architecture
+
+```text
+                    React Frontend
+                           │
+                           │ Axios
+                           ▼
+                  NestJS REST API
+                           │
+                           ▼
+                    Prisma ORM
+                           │
+                           ▼
+                     PostgreSQL
+                           │
+                           ▼
+                 Reservation Cron Job
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+# 📂 Folder Structure
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```text
+inventory-reservation-system
+│
+├── backend
+│   ├── prisma
+│   │   ├── migrations
+│   │   └── schema.prisma
+│   │
+│   ├── src
+│   │   ├── order
+│   │   ├── product
+│   │   ├── prisma
+│   │   ├── reservation
+│   │   └── main.ts
+│   │
+│   ├── test
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── frontend
+│   ├── public
+│   ├── src
+│   │   ├── api
+│   │   ├── components
+│   │   ├── constants
+│   │   ├── pages
+│   │   ├── types
+│   │   ├── utils
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   │
+│   └── package.json
+│
+├── assets
+│
+└── README.md
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+# 🗄 Database Schema
 
-# e2e tests
-$ npm run test:e2e
+```text
+Product
+-------
+id
+name
+description
+price
+stock
 
-# test coverage
-$ npm run test:cov
+        │
+        │ 1
+        │
+        │
+        ▼
+Reservation
+-----------
+id
+productId
+quantity
+status
+expiresAt
+
+        │
+        │ 1
+        │
+        ▼
+Order
+-----
+id
+reservationId
+productId
+quantity
+totalAmount
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+# 🔄 Reservation Workflow
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```text
+User
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+ │
+
+ ▼
+
+View Products
+
+ │
+
+ ▼
+
+Reserve Product
+
+ │
+
+ ▼
+
+Decrease Stock
+
+ │
+
+ ▼
+
+Reservation Created
+
+ │
+
+ ▼
+
+10 Minute Countdown
+
+ ├───────────────┐
+ │               │
+ │               │
+ ▼               ▼
+
+Complete      Reservation
+Order         Expired
+
+ │               │
+
+ ▼               ▼
+
+Create Order   Restore Stock
+
+ │               │
+
+ ▼               ▼
+
+Completed     Expired
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+# ⏰ Reservation Expiry
 
-Check out a few resources that may come in handy when working with NestJS:
+A scheduled Cron Job runs every 30 seconds.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+It performs the following actions:
 
-## Support
+- Checks expired reservations
+- Updates reservation status to **EXPIRED**
+- Restores reserved stock back to the product inventory
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+# 📡 REST API
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Products
 
-## License
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/products` | Get all products |
+| POST | `/products` | Create product |
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+## Reservations
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/reservations` | Reserve product |
+| GET | `/reservations/:id` | Get reservation details |
+
+---
+
+## Orders
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/orders` | Complete reservation |
+
+---
+
+# ⚙ Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/yourusername/inventory-reservation-system.git
+```
+
+---
+
+## Backend
+
+```bash
+cd backend
+
+npm install
+
+npm run start:dev
+```
+
+---
+
+## Frontend
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file inside the **backend** directory.
+
+```env
+DATABASE_URL=your_postgresql_connection_string
+```
+
+---
+
+# ▶ Running the Application
+
+## Backend
+
+```bash
+cd backend
+
+npm run start:dev
+```
+
+Server:
+
+```
+http://localhost:3000
+```
+
+---
+
+## Frontend
+
+```bash
+cd frontend
+
+npm run dev
+```
+
+Application:
+
+```
+http://localhost:5173
+```
+
+---
+
+# 🧪 Running Tests
+
+```bash
+cd backend
+
+npm test
+```
+
+Current project status:
+
+- Product Tests
+- Reservation Tests
+- Order Tests
+- Controller Tests
+- Prisma Service Tests
+
+---
+
+# 📸 Screenshots
+
+Create an **assets** folder and place screenshots inside it.
+
+```
+assets/
+
+products-page.png
+
+reservation-page.png
+
+expired-reservation.png
+
+postman-testing.png
+```
+
+Then GitHub will automatically display them.
+
+## Products Page
+
+```markdown
+![Products](assets/products-page.png)
+```
+
+---
+
+## Reservation Page
+
+```markdown
+![Reservation](assets/reservation-page.png)
+```
+
+---
+
+## Expired Reservation
+
+```markdown
+![Expired](assets/expired-reservation.png)
+```
+
+---
+
+## API Testing
+
+```markdown
+![Postman](assets/postman-testing.png)
+```
+
+---
+
+# 📈 Future Improvements
+
+- User Authentication
+- Role Based Authorization
+- Product Images
+- Product Search
+- Pagination
+- Admin Dashboard
+- Docker Support
+- CI/CD Pipeline
+- Redis Caching
+- Email Notifications
+- WebSocket Live Updates
+
+---
+
+# 💡 Design Decisions
+
+- Prisma ORM was used for type-safe database access.
+- PostgreSQL was selected as the relational database.
+- Cron Jobs automatically restore inventory after reservation expiry.
+- Material UI provides a responsive and consistent user interface.
+- The project follows a modular NestJS architecture for maintainability.
+- Unit tests were added for controllers and services.
+
+---
+
+# 👨‍💻 Author
+
+**Abin Das**
+
+Master's in IT Management | Full Stack Developer
+
+### Tech Stack
+
+- React
+- TypeScript
+- NestJS
+- Prisma
+- PostgreSQL
+- Material UI
+- REST APIs
+
+---
+
+⭐ If you found this project useful, consider giving it a star.

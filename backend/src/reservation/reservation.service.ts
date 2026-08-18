@@ -6,7 +6,16 @@ import { ReservationStatus } from '@prisma/client';
 @Injectable()
 export class ReservationService {
   constructor(private readonly prisma: PrismaService) {}
-
+  async findOne(id: string) {
+  return this.prisma.reservation.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      product: true,
+    },
+  });
+}
   async createReservation(dto: CreateReservationDto) {
     return this.prisma.$transaction(async (tx) => {
       const product = await tx.product.findUnique({
@@ -39,7 +48,7 @@ export class ReservationService {
           productId: product.id,
           quantity: dto.quantity,
           status: ReservationStatus.RESERVED,
-          expiresAt: new Date(Date.now() + 30* 1000),
+          expiresAt: new Date(Date.now() + 10 * 60 *  1000),
         },
       });
 
